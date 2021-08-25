@@ -1,45 +1,20 @@
 class Brave
-  
-  def name=(name)
-    @name = name
-  end
 
-  def name
-    @name
-  end
+  attr_reader :name, :offense, :defense
+  attr_accessor :hp
 
-  def hp=(hp)
-    @hp = hp
-  end
-
-  def hp
-    @hp
-  end
-
-  def offense=(offense)
-    @offense = offense
-  end
-
-  def offense
-    @offense 
-  end
-
-  def defense=(defense)
-    @defense = defense
-  end
-
-  def defense 
-    @defense
+  def initialize(**params)
+    @name = params[:name]
+    @hp = params[:hp]
+    @offense = params[:offense]
+    @defense = params[:defense]
   end
 
 end
 
-brave = Brave.new
+brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
 
-brave.name = "テリー"
-brave.hp = 500
-brave.offense = 150
-brave.defense = 100
+
 
 puts <<~TEXT
 NAME:#{brave.name}
@@ -48,3 +23,6 @@ OFFENSE:#{brave.offense}
 DEFENSE:#{brave.defense}
 TEXT
 
+brave.hp -= 30
+
+puts "#{brave.name}はダメージを受けた! 残りのHPは#{brave.hp}だ"
