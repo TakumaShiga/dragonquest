@@ -10,6 +10,14 @@ class Brave
     @defense = params[:defense]
   end
 
+  def attack(monster)
+    damage = @offense - monster.defense
+    monster.hp -= damage
+
+    puts "#{@name}は#{monster.name}にダメージを与えた"
+    puts "#{monster.name}の残りHPは#{monster.hp}だ"
+  end
+
 end
 
 class Monster
@@ -21,13 +29,14 @@ class Monster
     @hp = params[:hp]
     @offense = params[:offense]
     @defense = params[:defense]
-
+  end
 end
 
 monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
 
 brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
 
+brave.attack(monster)
 
 
 puts <<~TEXT
@@ -37,6 +46,4 @@ OFFENSE:#{brave.offense}
 DEFENSE:#{brave.defense}
 TEXT
 
-brave.hp -= 30
 
-puts "#{brave.name}はダメージを受けた! 残りのHPは#{brave.hp}だ"
