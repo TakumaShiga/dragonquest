@@ -74,21 +74,30 @@ class Monster
   end
 
   def attack(brave)
-
-    if @hp <= @triger_of_transform && @transform_flag == false
+    if @hp <= @triger_of_transform &&      @transform_flag == false
       @transform_flag = true
       transform
     end
-      puts "#{@name}の攻撃"
-
-      damage = @offense - brave.defense
-      brave.hp -= damage
     
-    puts "#{brave.name}は#{damage}のダメージを受けた"
+    puts "#{@name}の攻撃"
+    damage = calculate_damage(brave)
+    cause_damage(target: brave, damage: damage)
     puts "#{brave.name}の残りHPは#{brave.hp}だ"
   end
 
   private
+
+  def calculate_damage(target)
+      @offense - target.defense
+    end
+  end
+
+  def cause_damage(**params)
+    target = params[:target]
+    damage = params[:damage]
+    target.hp -= damage
+    puts "#{target.name}は#{damage}のダメージを受けた"
+  end
 
   def transform
     transform_name = "ドラゴン"
@@ -96,8 +105,8 @@ class Monster
      #{@name}は怒っている
      #{@name}は#{transform_name}に変身した
     EOS
-   @offense *= POWER_UP_RATE 
    @name = transform_name
+   @offense * POWER_UP_RATE
   end
 
 end
