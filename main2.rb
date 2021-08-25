@@ -1,26 +1,13 @@
 class Brave
 
+  attr_reader :name, :offense, :defense
+  attr_accessor :hp
+
   def initialize(**params)
     @name = params[:name]
     @hp = params[:hp]
     @offense = params[:offense]
     @defense = params[:defense]
-  end
-
-  def name
-    @name
-  end
-
-  def hp
-    @hp
-  end
-
-  def offense
-    @offense 
-  end
-
-  def defense 
-    @defense
   end
 
 end
@@ -36,3 +23,6 @@ OFFENSE:#{brave.offense}
 DEFENSE:#{brave.defense}
 TEXT
 
+brave.hp -= 30
+
+puts "#{brave.name}はダメージを受けた! 残りのHPは#{brave.hp}だ"
