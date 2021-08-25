@@ -1,5 +1,4 @@
 class Brave
-
   attr_reader :name, :offense, :defense
   attr_accessor :hp
 
@@ -14,20 +13,42 @@ class Brave
 
   def attack(monster)
     puts "#{@name}の攻撃"
-    attack_num = rand(4)
 
-    if attack_num == 0
-      puts "必殺攻撃"
-      damage = calculate_special_attack - monster.defense
-    else
-      puts "通常攻撃"
-      damage = @offense - monster.defense
-    end
+    attack_type = decision_attack_type
 
-    monster.hp -= damage
+    damage = calculate_damage(target: monster, attack_type: attack_type)
 
-    puts "#{monster.name}は#{damage}のダメージを受けた"
+    cause_damage(target: monster, damage: damage)
+   
     puts "#{monster.name}の残りHPは#{monster.hp}だ"
+  end
+
+  private
+
+  def decision_attack_type
+    attack_num = rand(4)
+    if attack_num == 0
+      "special_attack"
+    else
+      "normal_attack"
+    end
+  end
+
+  def calculate_damage(**params)
+    target = params[:target]
+    attack_type= params[:attack_type]
+    if attack_type == "special_attack"
+      calculate_special_attack - monster.defense
+    else
+      @offense - monster.defense
+    end
+  end
+
+  def cause_damage(**params)
+    target = params[:target]
+    damage = params[:damage]
+    monster.hp -= damage
+    puts "#{monster.name}は#{damage}のダメージを受けた"
   end
 
   def calculate_special_attack
@@ -56,7 +77,7 @@ class Monster
 
     if @hp <= @triger_of_transform && @transform_flag == false
       @transform_flag = true
-      tranform
+      transform
     end
       puts "#{@name}の攻撃"
 
