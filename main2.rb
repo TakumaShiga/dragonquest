@@ -14,7 +14,8 @@ class Brave
     damage = @offense - monster.defense
     monster.hp -= damage
 
-    puts "#{@name}は#{monster.name}にダメージを与えた"
+    puts "#{@name}の攻撃"
+    puts "#{monster.name}は#{damage}のダメージを受けた"
     puts "#{monster.name}の残りHPは#{monster.hp}だ"
   end
 
@@ -37,13 +38,5 @@ monster = Monster.new(name: "スライム", hp: 250, offense: 200, defense: 100)
 brave = Brave.new(name: "テリー", hp: 500, offense: 150, defense: 100)
 
 brave.attack(monster)
-
-
-puts <<~TEXT
-NAME:#{brave.name}
-HP:#{brave.hp}
-OFFENSE:#{brave.offense}
-DEFENSE:#{brave.defense}
-TEXT
 
 
