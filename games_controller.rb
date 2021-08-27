@@ -52,7 +52,7 @@ class GamesController
       gold = 0
     end
 
-    {brave_win_flag: barave_win_flag, exp: exp, gold: gold}
+    {brave_win_flag: brave_win_flag, exp: exp, gold: gold}
   end
 
 end
